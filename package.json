@@ -1,0 +1,109 @@
+{
+  "name": "kakaotalk-vscode",
+  "displayName": "KakaoTalk for VSCode",
+  "description": "Send KakaoTalk messages directly from VSCode",
+  "version": "0.0.1",
+  "publisher": "your-publisher-name",
+  "engines": {
+    "vscode": "^1.85.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "keywords": [
+    "kakaotalk",
+    "kakao",
+    "messaging",
+    "korea",
+    "chat"
+  ],
+  "activationEvents": [],
+  "main": "./dist/extension.js",
+  "icon": "resources/icons/kakaotalk.png",
+  "contributes": {
+    "viewsContainers": {
+      "activitybar": [
+        {
+          "id": "kakaotalk-sidebar",
+          "title": "KakaoTalk",
+          "icon": "resources/icons/kakaotalk.svg"
+        }
+      ]
+    },
+    "views": {
+      "kakaotalk-sidebar": [
+        {
+          "type": "webview",
+          "id": "kakaotalk.sidebarView",
+          "name": "KakaoTalk",
+          "contextualTitle": "KakaoTalk"
+        }
+      ]
+    },
+    "commands": [
+      {
+        "command": "kakaotalk.login",
+        "title": "KakaoTalk: Login"
+      },
+      {
+        "command": "kakaotalk.logout",
+        "title": "KakaoTalk: Logout"
+      },
+      {
+        "command": "kakaotalk.sendToMe",
+        "title": "KakaoTalk: Send Message to Me"
+      },
+      {
+        "command": "kakaotalk.sendCodeSnippet",
+        "title": "KakaoTalk: Send Selected Code"
+      }
+    ],
+    "menus": {
+      "editor/context": [
+        {
+          "command": "kakaotalk.sendCodeSnippet",
+          "group": "kakaotalk",
+          "when": "editorHasSelection"
+        }
+      ]
+    },
+    "configuration": {
+      "title": "KakaoTalk",
+      "properties": {
+        "kakaotalk.restApiKey": {
+          "type": "string",
+          "default": "",
+          "description": "Your Kakao REST API Key from Kakao Developers Console (https://developers.kakao.com)"
+        },
+        "kakaotalk.defaultTemplate": {
+          "type": "string",
+          "default": "text",
+          "enum": ["text", "feed"],
+          "description": "Default message template type"
+        },
+        "kakaotalk.showNotifications": {
+          "type": "boolean",
+          "default": true,
+          "description": "Show notifications when messages are sent"
+        }
+      }
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run package",
+    "compile": "node esbuild.js",
+    "watch": "node esbuild.js --watch",
+    "package": "node esbuild.js --production",
+    "lint": "eslint src --ext ts",
+    "test": "echo \"No tests yet\""
+  },
+  "devDependencies": {
+    "@types/node": "^25.0.9",
+    "@types/vscode": "^1.108.1",
+    "esbuild": "^0.27.2",
+    "typescript": "^5.9.3"
+  },
+  "dependencies": {
+    "axios": "^1.13.2"
+  }
+}
