@@ -19,7 +19,6 @@
   ],
   "activationEvents": [],
   "main": "./dist/extension.js",
-  "icon": "resources/icons/kakaotalk.png",
   "contributes": {
     "viewsContainers": {
       "activitybar": [
